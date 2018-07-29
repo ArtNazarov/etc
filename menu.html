@@ -1,0 +1,42 @@
+<html>
+<head>
+<title> Menu demo </title>
+<link rel="stylesheet" type="text/css" href="menu.css"/>
+<script src="menu.js"></script>
+</head>
+<body>
+<div id="menu"></div>
+<script>
+  window.onload = function(){
+  var tree = [ 
+  
+  { id : "article11", 
+  link : "/article11.html",
+  caption : "Article 1.1",
+  parent : "node1" }, 
+  
+{ id : "node1", 
+  link : "/node1.html",
+  caption : "Node 1",
+  parent : "Section1" }, 
+  
+  { id : "Section2", 
+  link : "/link2.htm",
+  caption : "Node 2",
+  parent : "root"},
+  
+  { id : "Section1", 
+  link : "/link1.htm",
+  caption : "Node 1",
+  parent : "root"},
+  
+  { id : "root",
+  caption : "Main",
+  link : "sitemap",
+  parent : ""}
+  ]
+    document.getElementById('menu').innerHTML = loadMenu(tree);
+  }
+</script>
+</body>
+</html>
