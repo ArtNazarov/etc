@@ -23,4 +23,4 @@ function experiment(h, n){
   return results;
 }
 
-experiment(40, 5);
+experiment(1000, 5);
