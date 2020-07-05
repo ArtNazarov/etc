@@ -6,7 +6,7 @@
 	var Arc = 'Король, Королева, Принц, Принцесса'.split(',');
 	for (var i=1;i<=10;i++) { Arc.push(i); };
 	for (var i=0;i<Ms.length;i++){
-		for (var j=0;j<=Arc.length;j++){
+		for (var j=0;j<Arc.length;j++){
 			tarotList.push(Ms[i]+' '+Arc[j]);
 		}
 	};
