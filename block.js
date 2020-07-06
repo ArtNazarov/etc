@@ -181,3 +181,24 @@ function followPointer(ev){
   for (var i=0;i<9;i++){
 	   blocks[i].acc().onclick = draggable(blocks[i].acc())  ;
   }
+  
+  // touch events
+  
+  document.addEventListener('touchmove', function(event) {
+  element = getSelected(); if (!element) return ;
+  element.style.zIndex = maxZ;
+  maxZ+=1;
+  element.style.left = event.touches[0].clientX;
+  element.style.top = event.touches[0].clientY;
+  
+
+}, false);
+
+for (var i=0;i<9;i++){
+	   blocks[i].acc().addEventListener('touchstart',  function(event) {
+		   window.selectedElem = this;
+	   });
+	    blocks[i].acc().addEventListener('touchend',  function(event) {
+		   window.selectedElem = null;
+	   });
+  }
