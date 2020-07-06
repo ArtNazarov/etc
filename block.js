@@ -1,15 +1,61 @@
 	
-	var tarotList = 
+	var MainArc = 
 	` «Дурак» («Шут»), «Маг», «Жрица», «Императрица», «Император», «Иерофант» («Первосвященник»), «Влюблённые» («Выбор»), «Колесница», «Справедливость» («Правосудие»), «Отшельник», «Колесо Фортуны» («Зеркало»), «Сила», «Повешенный», «Смерть», «Умеренность» («Время»), «Дьявол», «Башня», «Звезда», «Луна», «Солнце», «Страшный суд» («Суд»), «Мир»`.split(',');
+	
+	var tarotList = [];
+	for (var i=0;i<MainArc.length;i++){
+		tarotList.push( { caption : MainArc[i], path : '' } );
+	};
 	
 	var Ms = `Жезлы, пики, чаши,  монеты`.split(',');
 	var Arc = 'Король, Королева, Принц, Принцесса'.split(',');
 	for (var i=1;i<=10;i++) { Arc.push(i); };
 	for (var i=0;i<Ms.length;i++){
 		for (var j=0;j<Arc.length;j++){
-			tarotList.push(Ms[i]+' '+Arc[j]);
+			tarotList.push({ caption: Ms[i]+' '+Arc[j], path : ''});
 		}
 	};
+	
+	
+	
+	function pair(where, path){
+		console.log(tarotList);
+		for(var i=0;i<tarotList.length;i++){
+			if (tarotList[i].caption.indexOf(where)!==-1) {
+				tarotList[i].path = path;
+				return ;
+			}
+		}
+	};
+	
+	/* Images for cards */
+	pair('Шут', 'shut');
+	pair('Маг', 'mag');
+	pair('Жрица', 'verhovaya-zhrica');
+	pair('Императрица', 'imperatrica');
+	pair('Император', 'imperator');
+	pair('Иерофант', 'verhovnyi-zhrec');
+	pair('Влюблённые', 'vlublennye');
+	pair('Колесница', 'kolesnica');
+	pair('Справедливость',  'spravedlivost');
+	pair('Отшельник', 'otshelnik');
+	pair('Колесо', 'koleso-fortuny');
+	pair('Сила', 'sila');
+	pair('Повешенный', 'poveshennyi');
+	pair('Смерть', 'smert');
+	pair('Умеренность', 'umerennost');
+	pair('Солнце', 'solnce');
+	pair('Луна', 'luna');
+	pair('Мир', 'mir');
+	pair('Башня', 'padayushaya-bashnya');
+	pair('Суд', 'strashnyi-sud');
+	pair('Звезда', 'zvezda');
+	pair('Дьявол', 'diyavol');
+	
+	
+	
+	console.log(tarotList);
+	
 	
 	function shuffle(array) {
 		for(var i=0;i<=50;i++){
@@ -129,7 +175,14 @@
 		card = Math.floor(tarotList.length*Math.random());
 		if (card<tarotList.length) sel = true; break;
 		};
-       blocks[i].set_text(`Вам досталась карта<br/> ${tarotList[card]}`);
+		if (tarotList[card].path===''){
+       blocks[i].set_text(`Вам досталась карта<br/> ${tarotList[card].caption}`);
+		}
+		else
+		{
+			blocks[i].set_text(`Вам досталась карта<br/> ${tarotList[card].caption}<br/>
+			<img style='height:60%;width:auto' align='center' src='http://artnazarov.ru/cards/${tarotList[card].path}.jpg'/>`);
+		};
 	    tarotList.splice(card, 1);
 	   blocks[i].set_connect(c);
 	};
