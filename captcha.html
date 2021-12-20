@@ -1,0 +1,88 @@
+<html>
+<head>
+<script>
+
+function rand_str(n) { 
+ var chars = 'АБВГДЕЖИКЛМНОПРСТУФХЦЧЭЮЯ';
+ var res = '';
+ for (var i=0;i<n;i++) {
+   res += chars[Math.floor(Math.random()*chars.length)];
+ };
+    return res;
+};
+
+function que(w, a, b, c) { return w[a-1]+w[b-1]+w[c-1]; };
+
+function rand_num(n){
+	
+	 res = Math.floor(Math.random()*n);
+	 if (res == 0) { res = n; };
+	 return res;
+}
+
+function isValid(w, a, b, c, answer){
+	return (answer == que(w, a, b, c));
+}
+
+function Question(w, a, b, c) {
+	return `Введите из строки ${w} ${a}, ${b}, ${c} буквы`;
+}
+
+function generateQuestion(){
+	var w = rand_str(6);
+	var a = rand_num(6);
+	var b = rand_num(6);
+	var c = rand_num(6);
+	return	{
+		
+		'word' : w,
+		'index_a' : a,
+		'index_b'  : b,
+		'index_c'  : c
+}
+}
+question = { word : '', index_a : 1, index_b : 1, index_c : 1 };
+
+function newQ(){
+window.question = generateQuestion();
+ document.getElementById('que').innerText = Question(
+	question.word, question.index_a, question.index_b,
+	 question.index_c);
+	 }
+
+
+
+	   
+</script>
+</head>
+<body>
+<form>
+Вопрос:<br/>
+<span id='que'></span><br/>
+
+<input type='text' id='ans' name='ans'>
+<input type='button' id='check' value='Проверка ответа'/>
+<input type='button' id='showQuest' value='Другой вопрос вопрос'/>
+<span id='res'></span><br/>
+</form> 
+<script>
+ newQ();
+ document.getElementById('showQuest').onclick = function(){
+  newQ();
+}
+document.getElementById('check').onclick = function(){
+	if (isValid(question.word, question.index_a, question.index_b,
+	 question.index_c, document.getElementById('ans').value))
+	 {
+		 document.getElementById('res').innerText = 'Все верно, капча пройдена';
+		 // действие
+	 }
+	 else
+	 {
+		  document.getElementById('res').innerText = 'Ввели неправильный код!';
+		  // отказ
+	 }
+}
+ </script>
+</body>
+</html>
